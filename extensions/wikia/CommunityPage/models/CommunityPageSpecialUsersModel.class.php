@@ -137,7 +137,14 @@ class CommunityPageSpecialUsersModel {
 				$sqlData->runLoop( $db, function ( &$result, $row ) use ( &$validAdmins ) {
 					$validAdmins[$row->rev_user]['latestRevision'] = $row->latest_revision;
 				} );
-				
+
+				uasort( $validAdmins, function( $a, $b){
+					if ( $a[ 'latestRevision' ] === $b[ 'latestRevision' ]){
+						return 0;
+					}
+					return ($a[ 'latestRevision' ] < $b[ 'latestRevision' ]) ? 1 : -1;
+				} );
+
 				return array_values( $validAdmins );
 
 			} , WikiaDataAccess::REFRESH_CACHE
