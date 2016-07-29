@@ -94,7 +94,7 @@ class CommunityPageSpecialUsersModel {
 		return $data;
 	}
 	/**
-	 * Get all admins who have contributed in the last two years ordered by number of contributions
+	 * Get all admins who have contributed ordered by time of last contribution
 	 * filter out bots
 	 *
 	 * @return array|null
@@ -107,7 +107,6 @@ class CommunityPageSpecialUsersModel {
 				self::logUserModelPerformanceData( 'query', 'all_admins' );
 
 				$db = wfGetDB( DB_SLAVE );
-
 				$adminIds = $this->getAdmins();
 
 				if ( !$adminIds ) {
@@ -115,27 +114,33 @@ class CommunityPageSpecialUsersModel {
 				}
 
 				$botIds = $this->getBotIds();
-				$dateTwoYearsAgo = date( 'Y-m-d', strtotime( '-2 years' ) );
+
+				$validAdminIds = array_diff( $adminIds, $botIds );
+				$validAdmins = [];
+
+				foreach ( $validAdminIds as $id ) {
+					$validAdmins[ $id ] = [
+						'userId' => $id,
+						'latestRevision' => '',
+						'isAdmin' => true,
+					];
+				}
 
 				$sqlData = ( new WikiaSQL() )
 					->SELECT( 'rev_user_text, rev_user, MAX(rev_timestamp) AS latest_revision' )
 					->FROM ( 'revision FORCE INDEX (user_timestamp)' )
 					->WHERE( 'rev_user' )->NOT_EQUAL_TO( 0 )
-					->AND_( 'rev_user' )->IN( $adminIds )
+					->AND_( 'rev_user' )->IN( $validAdminIds )
 					->AND_( 'rev_user' )->NOT_IN( $botIds )
-					->AND_( 'rev_timestamp' )->GREATER_THAN( $dateTwoYearsAgo )
 					->GROUP_BY( 'rev_user' )
 					->ORDER_BY( 'latest_revision DESC' );
 
-				$result = $sqlData->runLoop( $db, function ( &$result, $row ) {
-					$result[] = [
-						'userId' => $row->rev_user,
-						'latestRevision' => $row->latest_revision,
-						'isAdmin' => true,
-					];
+				$sqlData->runLoop( $db, function ( &$result, $row ) use ( &$validAdmins ) {
+					$validAdmins[$row->rev_user]['latestRevision'] = $row->latest_revision;
 				} );
 
-				return $result;
+				return array_values( $this->sortAdminIds( $validAdmins ) );
+
 			}
 		);
 		self::logUserModelPerformanceData( 'view', 'all_admins', $this->isUserOnList( $data ), $this->isUserLoggedIn() );
@@ -511,5 +516,12 @@ class CommunityPageSpecialUsersModel {
 			$params = implode( ':', $params );
 		}
 		return wfMemcKey( $params, self::MCACHE_VERSION );
+	}
+
+	private function sortAdminIds($validAdmins){
+		uasort( $validAdmins, function( $a, $b ) {
+			return ( $a[ 'latestRevision' ] <= $b[ 'latestRevision' ] ) ? 1 : -1;
+		} );
+		return $validAdmins;
 	}
 }
