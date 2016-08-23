@@ -21,3 +21,8 @@ $wgHooks['BeforePageDisplay'][] = 'EmbeddableDiscussionsController::onBeforePage
 
 // i18n
 $wgExtensionMessagesFiles['EmbeddableDiscussions'] = __DIR__ . '/EmbeddableDiscussions.i18n.php';
+
+// messages exported to JS
+JSMessages::registerPackage( 'EmbeddableDiscussions', [
+	'embeddable-discussions-share-heading',
+] );
