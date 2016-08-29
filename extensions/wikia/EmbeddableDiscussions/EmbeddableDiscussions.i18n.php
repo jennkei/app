@@ -7,11 +7,15 @@ $messages['en'] = array(
 	'embeddable-discussions-share' => 'Share',
 	'embeddable-discussions-show-trending' => 'Trending Discussions',
 	'embeddable-discussions-show-latest' => 'Latest Discussions',
+	'embeddable-discussions-show-trending-in-category' => 'Trending discussions in $1',
+	'embeddable-discussions-show-latest-in-category' => 'Recent discussions in $1',
 	'embeddable-discussions-show-all' => 'View All →',
 	'embeddable-discussions-zero' => 'No posts yet.',
 	'embeddable-discussions-zero-detail' => 'Get the discussion started, create the first post now!',
 	'embeddable-discussions-forum-name' => 'In $1',
 	'embeddable-discussions-share-heading' => 'Share Post',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
+	'embeddable-discussions-error-loading' => 'Error loading discussions',
 );
 
 $messages['qqq'] = array(
@@ -20,11 +24,15 @@ $messages['qqq'] = array(
 	'embeddable-discussions-share' => 'Text to show for Share button',
 	'embeddable-discussions-show-trending' => 'Module heading when showing trending discussions',
 	'embeddable-discussions-show-latest' => 'Module heading when showing latest discussions',
+	'embeddable-discussions-show-trending-in-category' => 'Module heading when showing trending discussions in a specific category',
+	'embeddable-discussions-show-latest-in-category' => 'Module heading when showing latest discussions in a specific category',
 	'embeddable-discussions-show-all' => 'Link for showing all discussions (followed by arrow)',
 	'embeddable-discussions-zero' => 'Text for zero state (heading) when there are no discussion posts',
 	'embeddable-discussions-zero-detail' => 'Text for zero state (second line) when there are no discussion posts',
 	'embeddable-discussions-forum-name' => 'Show which forum a post belongs to. Forum name filled in from $1',
 	'embeddable-discussions-share-heading' => 'Heading text for share post modal',
+	'embeddable-discussions-loading' => 'Text to show when loading discussions cards (used on mobile only)',
+	'embeddable-discussions-error-loading' => 'Error message to show if loading of discussions items failed',
 );
 
 $messages['de'] = array(
@@ -37,6 +45,7 @@ $messages['de'] = array(
 	'embeddable-discussions-zero' => 'Es gibt noch keine Beiträge.',
 	'embeddable-discussions-zero-detail' => 'Erstelle einen Beitrag und starte eine neue Diskussion!',
 	'embeddable-discussions-forum-name' => 'In $1',
+	'embeddable-discussions-loading' => 'Diskussionen werden geladen...',
 );
 
 $messages['es'] = array(
@@ -49,6 +58,7 @@ $messages['es'] = array(
 	'embeddable-discussions-zero' => 'No hay entradas todavía.',
 	'embeddable-discussions-zero-detail' => '¡Empieza la discusión, crea la primera entrada ahora!',
 	'embeddable-discussions-forum-name' => 'En $1',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
 );
 
 $messages['fr'] = array(
@@ -61,6 +71,7 @@ $messages['fr'] = array(
 	'embeddable-discussions-zero' => 'Pas encore de publications.',
 	'embeddable-discussions-zero-detail' => 'Lancez la discussion en créant une publication maintenant !',
 	'embeddable-discussions-forum-name' => 'Dans 1 $',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
 );
 
 $messages['it'] = array(
@@ -73,6 +84,7 @@ $messages['it'] = array(
 	'embeddable-discussions-zero' => 'Ancora nessun post.',
 	'embeddable-discussions-zero-detail' => 'Iniziare la discussione, crea adesso il primo post!',
 	'embeddable-discussions-forum-name' => 'In $1',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
 );
 
 $messages['ja'] = array(
@@ -85,6 +97,7 @@ $messages['ja'] = array(
 	'embeddable-discussions-zero' => 'まだ投稿はありません。',
 	'embeddable-discussions-zero-detail' => '最初の投稿を作成してトークを始めてみよう！',
 	'embeddable-discussions-forum-name' => '$1内',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
 );
 
 $messages['pl'] = array(
@@ -97,6 +110,7 @@ $messages['pl'] = array(
 	'embeddable-discussions-zero' => 'Nie ma jeszcze postów.',
 	'embeddable-discussions-zero-detail' => 'Rozpocznij dyskusję, napisz pierwszy post!',
 	'embeddable-discussions-forum-name' => 'Na $1',
+	'embeddable-discussions-loading' => 'Loading Discussions...',
 );
 
 $messages['pt'] = array(
@@ -109,6 +123,7 @@ $messages['pt'] = array(
 	'embeddable-discussions-zero' => 'Ainda não há posts.',
 	'embeddable-discussions-zero-detail' => 'Inicie a discussão criando o primeiro post agora!',
 	'embeddable-discussions-forum-name' => 'Em $1',
+	'embeddable-discussions-loading' => 'Carregando discussões...',
 );
 
 $messages['ru'] = array(
@@ -121,6 +136,7 @@ $messages['ru'] = array(
 	'embeddable-discussions-zero' => 'Сообщений пока нет.',
 	'embeddable-discussions-zero-detail' => 'Начните обсуждение, опубликуйте первое сообщение!',
 	'embeddable-discussions-forum-name' => 'В $1',
+	'embeddable-discussions-loading' => 'Загрузка обсуждений...',
 );
 
 $messages['zh-hans'] = array(
@@ -133,6 +149,7 @@ $messages['zh-hans'] = array(
 	'embeddable-discussions-zero' => '还没有任何帖子。',
 	'embeddable-discussions-zero-detail' => '赶快发起讨论，现在就创建第一个帖子吧！',
 	'embeddable-discussions-forum-name' => '在$1中',
+	'embeddable-discussions-loading' => '正在加载讨论版...',
 );
 
 $messages['zh-hant'] = array(
@@ -145,5 +162,6 @@ $messages['zh-hant'] = array(
 	'embeddable-discussions-zero' => '沒有發佈任何文章。',
 	'embeddable-discussions-zero-detail' => '趕快發起討論，現在就去創建第一篇文章吧！',
 	'embeddable-discussions-forum-name' => '在$1中',
+	'embeddable-discussions-loading' => '正在載入討論版...',
 );
 
