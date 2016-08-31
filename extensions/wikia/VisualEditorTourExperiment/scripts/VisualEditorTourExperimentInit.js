@@ -15,14 +15,19 @@ define('VisualEditorTourExperimentInit',
 
 		function isEnabled() {
 			var enable = isAllowedCommunity();
-			if (mw.config.get('wgUserName') != null){
+			if (mw.config.get('wgUserName') != null) {
 				enable = enable && isUserLanguagePreferenceJapanese() && isUserwithoutedit();
 			}
 			return enable && !$.cookie('vetourdisabled');
 		}
 
 		function trackPublish() {
-			if (isAllowedCommunity() && !$.cookie('vetourdisabled')) {
+			var enable = isAllowedCommunity();
+			if (mw.config.get('wgUserName') != null) {
+				enable = enable && isUserLanguagePreferenceJapanese() && isUserwithoutedit();
+			}
+			if (enable) {
+				debugger;
 				tracker.trackVerboseSuccess(experimentName, 'publish');
 			}
 		}
