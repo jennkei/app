@@ -4,7 +4,7 @@ define('VisualEditorTourExperimentInit',
 		'use strict';
 
 		var experimentName = 'contribution-experiments';
-		
+
 		function init() {
 			var lang = mw.config.get('wgUserLanguage');
 			if (isEnabled()) {
@@ -14,13 +14,20 @@ define('VisualEditorTourExperimentInit',
 		}
 
 		function isEnabled() {
-			return isJapaneseCommunity() &&
-				(isNewlyregistered() || isUserwithoutedit()) &&
-				!$.cookie('vetourdisabled');
+			var enable = isAllowedCommunity();
+			if (mw.config.get('wgUserName') != null) {
+				enable = enable && isUserLanguagePreferenceJapanese() && isUserwithoutedit();
+			}
+			return enable && !$.cookie('vetourdisabled');
 		}
 
 		function trackPublish() {
-			if (isJapaneseCommunity() && (isNewlyregistered() || isUserwithoutedit())) {
+			var enable = isAllowedCommunity();
+			if (mw.config.get('wgUserName') != null) {
+				enable = enable && isUserLanguagePreferenceJapanese() && isUserwithoutedit();
+			}
+			if (enable) {
+				debugger;
 				tracker.trackVerboseSuccess(experimentName, 'publish');
 			}
 		}
@@ -29,16 +36,17 @@ define('VisualEditorTourExperimentInit',
 			$('#ca-ve-edit').popover('destroy');
 		}
 
-		function isJapaneseCommunity() {
-			return mw.config.get('wgContentLanguage') === 'ja';
-		}
-
-		function isNewlyregistered() {
-			return $.cookie('newlyregistered');
+		function isAllowedCommunity() {
+			var allowedLanguages = ['ja'];
+			return allowedLanguages.indexOf(mw.config.get('wgContentLanguage')) > -1;
 		}
 
 		function isUserwithoutedit() {
 			return $.cookie('userwithoutedit');
+		}
+
+		function isUserLanguagePreferenceJapanese() {
+			return mw.config.get('wgUserLanguage') === 'ja';
 		}
 
 		return {

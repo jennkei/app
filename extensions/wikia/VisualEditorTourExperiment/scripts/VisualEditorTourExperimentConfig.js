@@ -118,6 +118,128 @@ define('VisualEditorTourExperimentConfig', [], function () {
 				'ユーザーが参照できるよう、変更内容の説明を追加することもできますが、必須ではありません。[保存]をクリックしてそのまま他の' +
 				'Wikiページをさらに充実させましょう！'
 			}
+		],
+		'es': [
+			{
+				selector: '#WikiaArticle',
+				placement: 'top',
+				title: 'Escribe contenido',
+				description: '¡Comparte tu conocimiento con la comunidad! Este espacio es tuyo: escribe, arregla errores ' +
+				'ortográficos, añade enlaces. ¡Haz que esta página sea mejor con cada edición!'
+			},
+			{
+				selector: '.oo-ui-icon-link',
+				placement: 'bottom',
+				title: 'Añade enlaces',
+				description: "Resalta un texto al cual quieras añadir un enlace. Ahora puedes escribir el nombre de la página " +
+				"a la quieres dirigir. Recuerda que puedes remover un enlace haciendo clic en el botón 'Eliminar' luego de haber " +
+				"resaltado el texto. "
+			},
+			{
+				selector: '.oo-ui-icon-video',
+				placement: 'right',
+				title: 'Añade videos',
+				description: 'Sube videos a un espacio específico dentro de la página. Busca por un video que ya se encuentre ' +
+				'en la comunidad o coloca enlaces de sitios como YouTube, Vimeo o Dailymotion.'
+			},
+			{
+				selector: '.oo-ui-icon-image',
+				placement: 'right',
+				title: 'Añade imágenes',
+				description: 'Sube imágenes a un espacio específico dentro de la página. Luego de subirlo tendrás la ' +
+				'posibilidad de cambiar el tamaño.'
+			},
+			{
+				selector: '.oo-ui-icon-gallery',
+				placement: 'right',
+				title: 'Añade galerías',
+				description: 'Elige entre las imágenes subidas en esta comunidad para crear una galería.'
+			},
+			{
+				selector: '.oo-ui-icon-bullet-list',
+				placement: 'right',
+				title: 'Lista de viñetas y número',
+				description: 'Organiza tu texto con una lista. Puedes resaltar algunos párrafos e inserta una lista de tu ' +
+				'elección o simplemente insertar una lista y empezar a escribir. Si quieres convertir la lista en un texto ' +
+				'regular, simplemente haz clic en la lista seleccionada anteriormente.'
+			},
+			{
+				selector: '.oo-ui-labelElement.oo-ui-listToolGroup',
+				placement: 'bottom',
+				title: 'Añade contenido extra',
+				description: "Haz clic en 'Insertar' para elegir de un número de elementos extras: infobox, plantilla, " +
+				"básica, lista de referencias y tabla."
+			},
+			{
+				selector: '.ve-ui-toolbar-saveButton',
+				placement: 'bottom',
+				title: 'Publica tu edición',
+				description: "Luego de haber hecho tu edición, guarda los cambios hechos en la página haciendo clic en " +
+				"'Guardar página'. Ahora puedes añadir una descripcion a la edición para que otros usuarios sepan que hiciste, " +
+				"pero no es necesario. Haz clic en 'Guardar página' y busca otra página que necesite ser mejorada."
+			}
+		],
+		'de': [
+			{
+				selector: '#WikiaArticle',
+				placement: 'top',
+				title: 'Inhalte verfassen',
+				description: 'Teile deine Weisheit mit der Community! Du kannst hier schreiben, Grammatik korrigieren und ' +
+				'Links hinzufügen. Der Artikel wird mit jeder Bearbeitung besser! '
+			},
+			{
+				selector: '.oo-ui-icon-link',
+				placement: 'bottom',
+				title: 'Links hinzufügen',
+				description: "Markiere den Text, dem du einem Link hinzufügen willst. Danach kannst du den Namen der Community " +
+				"einfügen, zu der der Link führen soll. Der Link kann jederzeit wieder entfernt werden, wenn du nach dem " +
+				"Markieren des Textes auf die 'Link entfernen' Schaltfläche klickst."
+			},
+			{
+				selector: '.oo-ui-icon-video',
+				placement: 'right',
+				title: 'Video hinzufügen',
+				description: 'Hier kannst du ein Video an einem bestimmten Platz im Artikel einfügen. Suche nach dem Video ' +
+				'in der Community, oder gib eine URL von Seiten wie Youtube, Vimeo oder Dailymotion an. '
+			},
+			{
+				selector: '.oo-ui-icon-image',
+				placement: 'right',
+				title: 'Bild hinzufügen',
+				description: 'Lade ein Bild hoch, um es auf einem bestimmten Platz im Artikel einzufügen. Danach kannst ' +
+				'du die Größe des Elements verändern. '
+			},
+			{
+				selector: '.oo-ui-icon-gallery',
+				placement: 'right',
+				title: 'Galerie einfügen',
+				description: 'Du kannst aus den bereits in der Community vorhandenen Bilder auswählen und eine Galerie ' +
+				'damit erstellen. '
+			},
+			{
+				selector: '.oo-ui-icon-bullet-list',
+				placement: 'right',
+				title: 'Aufzählung und Nummerierung',
+				description: 'Ordne deinen Text in Listen. Du kannst ganze Absätze hervorheben und eine Liste deiner Wahl einfügen. ' +
+				'Du kannst auch einfach eine Liste wählen und anfangen zu schreiben. Wenn du eine Liste in einfachen Text ' +
+				'zurückverwandeln willst, dann klicke einfach auf die gewählte Liste. '
+			},
+			{
+				selector: '.oo-ui-labelElement.oo-ui-listToolGroup',
+				placement: 'bottom',
+				title: 'Zusätzlichen Inhalt erstellen',
+				description: "Klicke auf 'Einfügen' um aus einer Reihe von Elementen zu wählen: Infobox, Vorlage, " +
+				"Referenz, Referenzliste und Tabelle. "
+			},
+			{
+				selector: '.ve-ui-toolbar-saveButton',
+				placement: 'bottom',
+				title: 'Deinen Beitrag veröffentlichen',
+				description: "Nachdem du deinen Beitrag verfasst hast, kannst du den Artikel speichern, indem du auf " +
+				"'Vorschau' klickst. Du hast dort die Möglichkeit eine Zusammenfassung deiner Bearbeitung zu hinterlassen. " +
+				"Andere Benutzer können so sehen was du bearbeitet hast. Dies ist aber keine Pflicht. Klick auf " +
+				"'Seite speichern' und verbessere eine weitere Seite in der Community! "
+			}
 		]
 	};
 });
