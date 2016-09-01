@@ -27,7 +27,6 @@ define('VisualEditorTourExperimentInit',
 				enable = enable && isUserLanguagePreferenceJapanese() && isUserwithoutedit();
 			}
 			if (enable) {
-				debugger;
 				tracker.trackVerboseSuccess(experimentName, 'publish');
 			}
 		}
