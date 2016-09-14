@@ -93,10 +93,18 @@ class DiscussionsThreadModel {
 
 	public function getData( $showLatest, $limit, $category ) {
 		$sortKey = $showLatest ? self::SORT_LATEST_LINK : self::SORT_TRENDING_LINK;
-		$categoryId = $this->getCategoryId( $category );
+		$categoryId = false;
+		$invalidCategory = false;
+		$discussionsUrl = false;
 
-		if ( $categoryId ) {
-			$discussionsUrl = "/d/f?catId=$categoryId&sort=$sortKey";
+		if ( !empty($category) ) {
+			$categoryId = $this->getCategoryId( $category );
+
+			if ( $categoryId ) {
+				$discussionsUrl = "/d/f?catId=$categoryId&sort=$sortKey";
+			} else {
+				$invalidCategory = true;
+			}
 		} else {
 			$discussionsUrl = "/d/f?sort=$sortKey";
 		}
@@ -107,6 +115,8 @@ class DiscussionsThreadModel {
 			'requestUrl' => $this->getRequestUrl( $showLatest, $limit, $category ),
 			'baseUrl' => $this->getBaseUrl(),
 			'upvoteRequestUrl' => $this->getUpvoteRequestUrl(),
+			'invalidCategory' => $invalidCategory,
+			'categoryId' => $categoryId,
 		];
 	}
 }
