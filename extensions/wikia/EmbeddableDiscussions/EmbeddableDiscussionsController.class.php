@@ -120,7 +120,6 @@ class EmbeddableDiscussionsController {
 				->render( 'DiscussionThreadMobile.mustache' );
 		} else {
 			$modelData['requestData'] = json_encode( [
-				'baseUrl' => $modelData['baseUrl'],
 				'category' => $category,
 				'columns' => $columns,
 				'columnsDetailsClass' => $columns === 2 ? 'embeddable-discussions-post-detail-columns' : '',
