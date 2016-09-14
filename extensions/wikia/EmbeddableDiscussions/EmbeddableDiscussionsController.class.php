@@ -119,9 +119,6 @@ class EmbeddableDiscussionsController {
 				->setData( $modelData )
 				->render( 'DiscussionThreadMobile.mustache' );
 		} else {
-			//$modelData = ( new DiscussionsThreadModel( $wgCityId ) )->getData( $showLatest, $itemCount, $category );
-			myvardump( $modelData );
-
 			$modelData['requestData'] = json_encode( [
 				'baseUrl' => $modelData['baseUrl'],
 				'category' => $category,
