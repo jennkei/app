@@ -155,6 +155,10 @@ $font-size-large: 16px;
 		width: 48%;
 	}
 
+	.embeddable-discussions-post-detail-right-rail {
+		width: 100%;
+	}
+
 	.embeddable-discussions-reply-icon {
 		background: url($reply-icon) no-repeat;
 		height: $icon-size;
