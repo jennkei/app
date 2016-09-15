@@ -104,6 +104,11 @@ class CakeRelatedContentService {
 								'url' => $content->getUrl(),
 								'thumbnail' => $content->getImage(),
 								'title' => $this->formatTitle($content),
+								'publishDate' => $content->getModified(),
+								'author' => $this->getAuthor($content->getContentMetadata()),
+								'isVideo' => false,
+								'meta' => $content->getContentMetadata(),
+								'source' => $this->getRecirculationContentType($content->getContentType()),
 							] );
 					}
 
@@ -141,11 +146,34 @@ class CakeRelatedContentService {
 
 		if ($content->getContentType() == "Discussion Thread") {
 			return $wgContLang->truncate(
-					"[Discussions] {$content->getTitle()}",
+					$content->getTitle(),
 					self::DISCUSSION_THREAD_TITLE_MAX_LENGTH);
 		}
 
 		return $content->getTitle();
+	}
+
+	private function getAuthor($metadata) {
+		if (array_key_exists("authorName", $metadata)) {
+			return $metadata["authorName"];
+		} else {
+			return "";
+		}
+
+	}
+
+	private function getRecirculationContentType($contentType) {
+		switch ($contentType) {
+			case "Discussion Thread":
+				return "discussions";
+			case "Fandom Article":
+				return "fandom";
+			case "Wiki Article":
+				return "wiki";
+			default:
+				return "undefined";
+		}
+
 	}
 
 	private function onValidWiki() {
