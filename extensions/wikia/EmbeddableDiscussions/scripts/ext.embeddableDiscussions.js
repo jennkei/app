@@ -63,18 +63,21 @@ require([
 		var ret = [],
 			i,
 			thread,
-			userData;
+			userData,
+			date;
 
 		for (i in threads) {
 			thread = threads[i];
 			userData = thread._embedded.userData[0];
+			date = new Date(thread.creationDate.epochSecond * 1000)
 
 			ret.push({
 				author: thread.createdBy.name,
 				authorAvatar: thread.createdBy.avatarUrl,
 				commentCount: thread.postCount,
 				content: thread.rawContent,
-				createdAt: $.timeago(new Date(thread.creationDate.epochSecond * 1000)),
+				createdAt: $.timeago(date),
+				timestamp: date.toLocaleString([mw.config.get('wgContentLanguage')]),
 				forumName: $.msg( 'embeddable-discussions-forum-name', thread.forumName),
 				id: thread.id,
 				firstPostId: thread.firstPostId,
