@@ -25,6 +25,9 @@ $font-size-regular: 14px;
 $font-size-large: 16px;
 
 .embeddable-discussions-module {
+	@include flexbox();
+	@include flex-direction(column);
+
 	border: 1px solid $container-border-color;
 	margin: 0;
 	padding: 3px 21px 30px 27px;
