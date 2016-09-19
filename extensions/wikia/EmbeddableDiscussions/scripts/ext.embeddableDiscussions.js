@@ -59,7 +59,7 @@ require([
 		});
 	}
 
-	function processData(threads, baseUrl, upvoteUrl) {
+	function processData(threads, upvoteUrl) {
 		var ret = [],
 			i,
 			thread,
@@ -102,6 +102,7 @@ require([
 				withCredentials: true
 			},
 		}).done(function (data) {
+			console.log(requestData.upvoteRequestUrl);
 			var threads = processData(data._embedded.threads, requestData.upvoteRequestUrl);
 
 			$elem.html(mustache.render(templates.DiscussionThreads, {
