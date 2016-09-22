@@ -1,6 +1,9 @@
 @import 'skins/oasis/css/core/breakpoints-variables';
 @import 'extensions/wikia/DesignSystem/bower_components/design-system/base/typography';
 
+// colors
+$color-slate-gray: #656e78;
+
 // fonts
 $community-page-font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
 
@@ -11,6 +14,8 @@ $module-margin-bottom: 42px;
 $module-default-line-height: 20px;
 $avatar-size: 30px;
 $avatar-flex: 0 0 $avatar-size;
+$username-column-width: 174px;
+$userrank-column-width: 26px;
 
 // spacing
 $content-spacing-xxsmall: 6px;
