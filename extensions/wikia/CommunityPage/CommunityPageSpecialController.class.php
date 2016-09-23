@@ -56,10 +56,11 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			'defaultModules' => $this->getDefaultModules( $defaultModulesLimit ),
 			'helpModule' => $this->getHelpModuleData(),
 			'communityTodoListModule' => $this->getCommunityTodoListData(),
-			'discussionsModule' => !empty( $wgEnableDiscussions ) ? EmbeddableDiscussionsController::render( null, [
-				'columns' => '2',
-				'size' => '6'
-			] ) : '',
+			'discussionsModule' => !empty( $wgEnableDiscussions ) ? ( new EmbeddableDiscussionsController() )
+				->render( null, [
+					'columns' => '2',
+					'size' => '6'
+				] ) : '',
 			'contributorsModuleEnabled' => !$this->wg->CommunityPageDisableTopContributors,
 			'inspectlet' => ( new InspectletService( InspectletService::COMMUNITY_PAGE ) )->getInspectletCode()
 		] );
@@ -71,8 +72,9 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 	 */
 	public function getTopContributorsData() {
 		$limit = $this->request->getInt( 'limit', 0 );
-
-		$currentUserContributionCount = ( new UserStatsService( $this->getUser()->getId() ) )->getEditCountFromWeek();
+		$user = $this->getUser();
+		$currentUserContributionCount = ( new UserStatsService( $user->getId() ) )
+			->getEditCountFromWeek();
 		$topContributors = $this->usersModel->getTopContributors();
 		$topContributorsCount = count( $topContributors );
 		$userRank = $this->calculateCurrentUserRank( $currentUserContributionCount, $topContributors );
@@ -100,14 +102,17 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			$this->msg( 'communitypage-anon-register' )->text()
 		);
 
-		$anonText = $this->msg( 'communitypage-anon-contrib-header' )->rawParams( $login, $register )->escaped();
+		$anonText = $this->msg( 'communitypage-anon-contrib-header' )
+			->rawParams( $login, $register )
+			->escaped();
 
 		$this->response->setData( [
 			'admin' => $this->msg( 'communitypage-admin' )->text(),
 			'topContributorsHeaderText' => $this->msg( 'communitypage-top-contributors-week' )->text(),
 			'yourRankText' => $this->msg( 'communitypage-user-rank' )->text(),
 			'userContributionsText' => $this->msg( 'communitypage-user-contributions' )
-				->numParams( $this->getLanguage()->formatNum( $currentUserContributionCount ) )
+				->numParams( $this->getLanguage()
+				->formatNum( $currentUserContributionCount ) )
 				->text(),
 			'noContribsText' => $this->msg( 'communitypage-no-contributions' )->text(),
 			'contributors' => $topContributorsDetails,
@@ -115,6 +120,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 				$this->getUser()->getName(),
 				AvatarService::AVATAR_SIZE_SMALL_PLUS
 			),
+			'userBadge' => $this->usersModel->getUserBadge( $user->getEffectiveGroups() ),
 			'userRank' => $userRank,
 			'weeklyEditorCount' => $this->formatTotalEditorsNumber( $topContributorsCount ),
 			'userContribCount' => $currentUserContributionCount,
@@ -145,7 +151,9 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			'noAdminText' => $this->msg( 'communitypage-no-admins' )->text(),
 			'noAdminContactText' => $this->msg( 'communitypage-no-admins-contact' )->text(),
 			'adminsText' => $this->msg( 'communitypage-admins-welcome-text' )->text(),
-			'noAdminHref' => $this->msg( 'communitypage-communitycentral-link' )->inContentLanguage()->text(),
+			'noAdminHref' => $this->msg( 'communitypage-communitycentral-link' )
+				->inContentLanguage()
+				->text(),
 		];
 		$this->response->setData( array_merge( $templateMessages, $topAdminsTemplateData ) );
 	}
@@ -155,7 +163,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 	 * @return array
 	 */
 	public function getTopModeratorsData() {
-		$topModeratorsData['topModerators'] =
+		$topModeratorsData[ 'topModerators' ] =
 			$this->getContributorsDetails(
 				$this->usersModel->getTopModerators( self::TOP_MODERATORS_MODULE_LIMIT ),
 				AvatarService::AVATAR_SIZE_SMALL_PLUS
@@ -166,7 +174,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			'noAdminContactText' => $this->msg( 'communitypage-no-admins-contact' )->plain(),
 		];
 		$moduleToggle = [
-			'topModeratorsModuleEnabled' => !empty($topModeratorsData['topModerators'])
+			'topModeratorsModuleEnabled' => !empty( $topModeratorsData[ 'topModerators' ] )
 		];
 
 		$this->response->setData( array_merge( $templateMessages, $topModeratorsData, $moduleToggle ) );
@@ -188,7 +196,9 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			'allAdminsCount' => $this->getLanguage()->formatNum( count( $allAdminsDetails ) ),
 			'noAdminText' => $this->msg( 'communitypage-no-admins' )->text(),
 			'noAdminContactText' => $this->msg( 'communitypage-no-admins-contact' )->text(),
-			'noAdminHref' => $this->msg( 'communitypage-communitycentral-link' )->inContentLanguage()->text(),
+			'noAdminHref' => $this->msg( 'communitypage-communitycentral-link' )
+				->inContentLanguage()
+				->text(),
 		] );
 	}
 
@@ -302,7 +312,6 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 			'isZeroState' => !$data[ 'haveContent' ],
 			'heading' => $this->msg( 'communitypage-todo-module-heading' )->text(),
 			'editList' => $this->msg( 'communitypage-todo-module-edit-list' )->text(),
-			'description' => $this->msg( 'communitypage-todo-module-description' )->text(),
 			'zeroStateText' => $this->msg( 'communitypage-todo-module-zero-state' )->plain(),
 		] );
 	}
@@ -316,6 +325,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 	 * Get details for display of top contributors
 	 *
 	 * @param array $contributors List of contributors containing userId and contributions for each user
+	 * @param int $avatarSize optional param size if requested size other than default
 	 * @return array
 	 */
 	private function getContributorsDetails( $contributors, $avatarSize = AvatarService::AVATAR_SIZE_SMALL_PLUS ) {
@@ -324,7 +334,6 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 		return array_map( function ( $contributor ) use ( &$count, $avatarSize ) {
 			$user = User::newFromId( $contributor[ 'userId' ] );
 			$userName = $user->getName();
-			$avatar = AvatarService::renderAvatar( $userName, $avatarSize );
 			$count += 1;
 
 			if ( User::isIp( $userName ) ) {
@@ -333,13 +342,15 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 
 			return [
 				'userName' => $userName,
-				'avatar' => $avatar,
+				'avatar' => AvatarService::renderAvatar( $userName, $avatarSize ),
 				'contributionsText' => $this->msg( 'communitypage-contributions' )
-					->numParams( $this->getLanguage()->formatNum( $contributor[ 'contributions' ] ?? 0 ) )->text(),
+					->numParams( $this->getLanguage()->formatNum( $contributor[ 'contributions' ] ?? 0 ) )
+					->text(),
 				'profilePage' => $user->getUserPage()->getLocalURL(),
 				'count' => $count,
 				'isAdmin' => $contributor[ 'isAdmin' ] ?? false,
 				'timeAgo' => $contributor[ 'timeAgo' ] ?? null,
+				'badge' => $this->usersModel->getUserBadge(  $user->getEffectiveGroups() )
 			];
 		}, $contributors );
 	}
@@ -365,7 +376,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 		} else {
 			$heroImageUrl = ( new SiteAttributeService() )
 				->getApiClient()
-				->getAttribute($wgCityId, 'heroImage')
+				->getAttribute( $wgCityId, 'heroImage' )
 				->getValue() ?? '';
 		}
 
@@ -387,6 +398,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 				$url = $thumbnail ? $thumbnail->getUrl() : '';
 			}
 		}
+
 		return $url;
 	}
 
@@ -404,6 +416,7 @@ class CommunityPageSpecialController extends WikiaSpecialPageController {
 				$rank++;
 			}
 		}
+
 		return $userRank;
 	}
 

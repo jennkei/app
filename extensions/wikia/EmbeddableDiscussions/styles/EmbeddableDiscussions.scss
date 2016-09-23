@@ -141,7 +141,6 @@ $plus-icon-size: 34px;
 	}
 
 	.embeddable-discussions-post-detail-columns {
-		height: 100%;
 		margin-right: 10px;
 		width: 48%;
 	}
@@ -203,6 +202,7 @@ $plus-icon-size: 34px;
 		font-size: $typescale-size-plus-1;
 		font-weight: bold;
 		margin-bottom: $content-spacing-xxsmall;
+		min-height: $typescale-size-plus-2;
 	}
 
 	.embeddable-discussions-upvote-icon {

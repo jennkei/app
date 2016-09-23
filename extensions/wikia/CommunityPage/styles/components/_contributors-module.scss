@@ -6,6 +6,10 @@
 
 // Styles for the contributors module in-page and modal version
 .contributors-module {
+	.badge-container {
+		@include avatar-badge($avatar-small-badge-top, $avatar-small-badge-left);
+	}
+
 	.avatar-container {
 		display: inline-block;
 		margin-right: $content-spacing-xxsmall;
@@ -33,7 +37,7 @@
 	}
 
 	.community-page-contributor-details {
-		max-width: $username-column-width - $userrank-column-width;
+		max-width: 148px;
 		overflow-wrap: break-word;
 		vertical-align: middle;
 	}
@@ -138,6 +142,7 @@
 
 		.community-page-contributor-details {
 			@include flex(10 1 100%);
+			max-width: 100%;
 		}
 
 		.community-page-details {

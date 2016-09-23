@@ -10,12 +10,20 @@ $community-page-font-family: "HelveticaNeue", Helvetica, Arial, sans-serif;
 // Generic modules
 $module-margin-bottom: 42px;
 
+// spacing
+$content-spacing-xxsmall: 6px;
+$content-spacing-xsmall: 10px;
+$content-spacing-small: 12px;
+$content-spacing-small-plus: 14px;
+$content-spacing-regular: 18px;
+$content-spacing-large: 24px;
+$content-spacing-xlarge: 30px;
+$content-spacing-xxlarge: 40px;
+
 // Contributor module
 $module-default-line-height: 20px;
 $avatar-size: 30px;
 $avatar-flex: 0 0 $avatar-size;
-$username-column-width: 174px;
-$userrank-column-width: 26px;
 
 // spacing
 $content-spacing-xxsmall: 6px;
@@ -39,6 +47,13 @@ $community-page-rail-width-xbig: 350px;
 $community-page-card-module-width-small: 232px;
 $community-page-card-module-width-regular: 240px;
 
+//badges
+$avatar-small-badge-left: -6px;
+$avatar-small-badge-top: -7px;
+$avatar-large-badge-left: -27px;
+$avatar-large-badge-top: -4px;
+$avatar-badge-z-index: 10;
+
 @mixin trim-to-line-number($number) {
 	display: -webkit-box;
 	overflow: hidden;
@@ -50,4 +65,15 @@ $community-page-card-module-width-regular: 240px;
 	// (fallback for other browsers)
 	line-height: $line-height;
 	max-height: $number * $line-height;
+}
+
+@mixin avatar-badge($top, $left) {
+	position: relative;
+	top: $top;
+	left: $left;
+
+	svg {
+		position: absolute;
+		z-index: $avatar-badge-z-index;
+	}
 }
