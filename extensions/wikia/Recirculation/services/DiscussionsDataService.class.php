@@ -55,7 +55,7 @@ class DiscussionsDataService {
 	 */
 	private function apiRequest() {
 		$options = [];
-		$endpoint = $this->cityId . '/forums/' . $this->cityId;
+		$endpoint = $this->cityId . '/threads';
 
 		$url = $this->buildUrl( $endpoint, $options );
 		$data = Http::get( $url );
@@ -89,7 +89,7 @@ class DiscussionsDataService {
 		$post = [];
 		$post['author'] = $rawPost['createdBy']['name'];
 		$post['authorAvatar'] = $rawPost['createdBy']['avatarUrl'];
-		$post['content'] = wfShortenText($rawPost['_embedded']['firstPost'][0]['rawContent'], 120);
+		$post['content'] = wfShortenText($rawPost['rawContent'], 120);
 		$post['upvoteCount'] = $rawPost['upvoteCount'];
 		$post['commentCount'] = $rawPost['postCount'];
 		$post['createdAt'] = wfTimestamp( TS_ISO_8601, $rawPost['creationDate']['epochSecond'] );
@@ -104,8 +104,8 @@ class DiscussionsDataService {
 		$data = [];
 		$siteId = $rawData['siteId'];
 
-		$rawPosts = $rawData['_embedded']['doc:threads'];
-		$data['discussionsUrl'] = $this->server . '/d/f/' .$siteId. '/trending';
+		$rawPosts = $rawData['_embedded']['threads'];
+		$data['discussionsUrl'] = $this->server . '/d/f';
 		$data['postCount'] = $rawData['threadCount'];
 		$data['posts'] = [];
 		$data['headerImage'] = $this->headerImage( $siteId );
